@@ -38,7 +38,6 @@ next()
 app.get('/users', (req, res) => {
     const html=`
     <ul>
-
     ${users.map(user=>`<li>${user.first_name}</li>`)}
     </ul>
     `;
@@ -46,6 +45,10 @@ app.get('/users', (req, res) => {
 })
 
 app.get('/api/users', (req, res) => {
+   res.setHeader('X-Myname','harsh')//custom header
+
+  // ALways add  a x to custom he
+ // console.log(req.headers)
     return res.json(users)
 })
 
