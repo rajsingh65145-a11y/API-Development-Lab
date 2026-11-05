@@ -46,6 +46,8 @@ app.get('/api/users', (req, res) => {
 
 app.route('/api/users/:id')
     .get((req, res) => {
+
+        
         const id = Number(req.params.id);
         const user = users.find((user) => user.id === id);
         if (!user) return res.status(404).json({ status: 'error', message: 'User not found' });
@@ -55,6 +57,8 @@ app.route('/api/users/:id')
         const id = Number(req.params.id);
         const index = users.findIndex((user) => user.id === id);
         if (index === -1) return res.status(404).json({ status: 'error', message: 'User not found' });
+
+
 
         users[index] = { ...users[index], ...req.body };
         fs.writeFile('./MOCK_DATA.json', JSON.stringify(users), (err) => {
@@ -75,11 +79,15 @@ app.route('/api/users/:id')
     });
 
 app.post('/api/users', (req, res) => {
+
+
     const body = req.body;
     const jobTitle = body.Job_title || body.job_title;
     if (!body.first_name || !body.last_name || !body.email || !jobTitle) {
         return res.status(400).json({ status: 'error', message: 'All field are required' });
     }
+
+
     const maxId = users.reduce((max, user) => (user.id > max ? user.id : max), 0);
     const newId = maxId + 1;
     const newUser = { ...body, Job_title: jobTitle, id: newId };
