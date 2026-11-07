@@ -80,7 +80,7 @@ app.route('/api/users/:id')
 
 app.post('/api/users', (req, res) => {
 
-     
+         
     const body = req.body;
     const jobTitle = body.Job_title || body.job_title;
     if (!body.first_name || !body.last_name || !body.email || !jobTitle) {
